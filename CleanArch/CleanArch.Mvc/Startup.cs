@@ -1,4 +1,5 @@
 using CleanArch.Infrastracture.Data.Context;
+using CleanArch.Infrastructure.Ioc;
 using CleanArch.Mvc.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -38,6 +39,7 @@ namespace CleanArch.Mvc
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();
             services.AddRazorPages();
+            RegistrationServices(services);
          
         }
 
@@ -70,6 +72,11 @@ namespace CleanArch.Mvc
                     pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
             });
+        }
+
+        private static void RegistrationServices(IServiceCollection services)
+        {
+            DependencyContainer.RegisterServices(services);
         }
     }
 }
